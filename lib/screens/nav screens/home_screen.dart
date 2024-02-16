@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/history_screen.dart';
-import 'package:myapp/screens/login_screen.dart';
-import 'package:myapp/screens/profile_screen.dart';
-import 'package:myapp/screens/setting_screen.dart';
+import 'package:myapp/screens/nav%20screens/history_screen.dart';
+import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
+import 'package:myapp/screens/nav%20screens/profile_screen.dart';
+import 'package:myapp/screens/nav%20screens/setting_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {

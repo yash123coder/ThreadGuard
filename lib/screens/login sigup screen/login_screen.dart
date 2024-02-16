@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myapp/components/google_login.dart';
 // import 'package:flutter_glow/flutter_glow.dart';
 import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/nav%20screens/home_screen.dart';
 // import '../../../threadguard/home_screen.dart';
-import 'package:myapp/screens/signup_screen.dart';
+import 'package:myapp/screens/login%20sigup%20screen/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'forget_password.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // import '../../threadguard/home_screen.dart';
 // import 'package:myapp/screens/login_screen.dart';
 // import 'package:myapp/screens/signup_screen.dart';
-import 'package:myapp/screens/splash_screen.dart';
+import 'package:myapp/screens/login%20sigup%20screen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

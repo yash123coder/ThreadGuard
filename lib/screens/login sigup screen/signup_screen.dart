@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/components/google_login.dart';
 import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/nav%20screens/home_screen.dart';
 // import 'package:myapp/screens/home_screen.dart';
-import 'package:myapp/screens/login_screen.dart';
+import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
