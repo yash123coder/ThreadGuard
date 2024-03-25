@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -206,9 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: size.width * 0.85,
                       height: size.height * 0.1,
                       decoration: BoxDecoration(
-                          color: const  Color.fromARGB(255, 33, 81, 148),
+                          color: const Color.fromARGB(255, 33, 81, 148),
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: const  [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.black38,
                                 spreadRadius: 1,
@@ -251,7 +252,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Stack(
                                 children: <Widget>[
                                   AnimatedPositioned(
-                                    duration: const Duration(microseconds: 1000),
+                                    duration:
+                                        const Duration(microseconds: 1000),
                                     curve: Curves.easeIn,
                                     top: 1.5,
                                     left: status ? 35 : 0.0,
@@ -263,7 +265,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         });
                                       },
                                       child: AnimatedSwitcher(
-                                        duration: const Duration(microseconds: 1000),
+                                        duration:
+                                            const Duration(microseconds: 1000),
                                         transitionBuilder: (Widget child,
                                             Animation<double> animation) {
                                           return ScaleTransition(
@@ -287,7 +290,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    MaterialButton(
+                        onPressed: () async {
+                          final SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.remove('email');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ));
+                        },
+                        child: const Text('logout')),
                   ],
                 ),
               ),
