@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/components/google_login.dart';
 import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/nav%20screens/home_screen.dart';
-// import 'package:myapp/screens/home_screen.dart';
 import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
+import 'package:myapp/screens/nav%20screens/mainscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -25,10 +24,10 @@ class _SignupScreenState extends State<SignupScreen> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg1.jpg'),
+              image:const AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.fill, // Use BoxFit.fill to cover the full screen
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.5), // Add opacity to the image
+            Colors.black.withOpacity(0.5), // Add opacity to the image
                 BlendMode.srcOver,
               ),
             ),
@@ -51,10 +50,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         'assets/images/security.png',
                         height: 200,
                       ),
-                      SizedBox(
+                     const SizedBox(
                         height: 5,
                       ),
-                      Center(
+                     const Center(
                         child: Text(
                           "CREATE ACCOUNT",
                           style: TextStyle(color: Colors.white, fontSize: 20),
@@ -62,25 +61,24 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       TextFormField(
                         controller: _nameController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
+                        style:const TextStyle(color: Colors.white),
+                        decoration:const InputDecoration(
                           labelText: 'Name',
-                          labelStyle: TextStyle(color: Colors.white70),
+                          labelStyle:const TextStyle(color: Colors.white70),
                           prefixIcon: Icon(Icons.person, color: Colors.white70),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Please enter your name';
                           }
-                          // Add more name validation logic if needed
                           return null;
                         },
                       ),
-                      SizedBox(height: 12),
+                     const SizedBox(height: 12),
                       TextFormField(
                         controller: _emailController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
+                        style:const TextStyle(color: Colors.white),
+                        decoration:const InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.white70),
                           prefixIcon: Icon(Icons.email, color: Colors.white70),
@@ -96,17 +94,17 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 12),
+                     const SizedBox(height: 12),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        style: TextStyle(
+                        style:const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.white70),
-                          prefixIcon: Icon(Icons.key, color: Colors.white70),
+                          labelStyle:const TextStyle(color: Colors.white70),
+                          prefixIcon:const Icon(Icons.key, color: Colors.white70),
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -131,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 12),
+                     const SizedBox(height: 12),
                       // TextFormField(
                       //   controller: _confirmPasswordController,
                       //   obscureText: true,
@@ -149,13 +147,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isPasswordVisible,
-                        style: TextStyle(
+                        style:const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.white70),
-                          prefixIcon: Icon(Icons.key, color: Colors.white70),
+                          labelStyle:const TextStyle(color: Colors.white70),
+                          prefixIcon:const Icon(Icons.key, color: Colors.white70),
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -183,17 +181,17 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 24),
+                     const SizedBox(height: 24),
                       ElevatedButton(
                         onPressed: _submit,
-                        child: Text(
+                        child:const Text(
                           'Sign Up',
                           style: TextStyle(color: bg, fontSize: 18),
                         ),
                       ),
-                      SizedBox(height: 12),
+                     const SizedBox(height: 12),
 
-                      Row(
+                    const  Row(
                         children: [
                           Expanded(
                             child: Divider(
@@ -214,7 +212,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
 
-                      SizedBox(
+                     const SizedBox(
                         height: 12,
                       ),
                       
@@ -235,7 +233,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       //       ],
                       //     )),
 
-                      SizedBox(height: 12),
+                     const SizedBox(height: 12),
 
                       TextButton(
                         onPressed: () {
@@ -250,7 +248,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                           const Text(
                               'Already have an account?',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -275,16 +273,16 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
-      // Add your signup logic here
-
-      // After successful signup, navigate back to the login screen
       final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
+        sharedPreferences.setString('name', _nameController.text);
         sharedPreferences.setString('email', _emailController.text);
+        sharedPreferences.setString('password', _passwordController.text);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              // builder: (context) => HomeScreen(),
+              builder: (context) => const MainScreen(),
             )
             );
     }

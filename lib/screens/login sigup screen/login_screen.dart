@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/components/google_login.dart';
-// import 'package:flutter_glow/flutter_glow.dart';
 import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/nav%20screens/home_screen.dart';
-// import '../../../threadguard/home_screen.dart';
 import 'package:myapp/screens/login%20sigup%20screen/signup_screen.dart';
+import 'package:myapp/screens/nav%20screens/mainscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'forget_password.dart';
 
@@ -28,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg1.jpg'),
+              image: const AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.fill, // Use BoxFit.fill to cover the full screen
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.5), // Add opacity to the image
@@ -54,17 +52,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: size.height * 0.01,
                         ),
 
-                        Text(
+                       const Text(
                           "Welcome Back!",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        SizedBox(
+                       const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           controller: _emailController,
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          style: const TextStyle(color: Colors.white),
+                          decoration: const InputDecoration(
                             labelText: 'Username/Email',
                             labelStyle: TextStyle(color: Colors.white70),
                             prefixIcon:
@@ -82,17 +80,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextFormField(
                           controller: _passwordController,
                           obscureText: !_isPasswordVisible,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: TextStyle(color: Colors.white70),
-                            prefixIcon: Icon(Icons.lock, color: Colors.white70),
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            prefixIcon:
+                                const Icon(Icons.lock, color: Colors.white70),
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -120,11 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         // SizedBox(height: 7),
                         TextButton(
                           onPressed: () {
-                            // Navigate to forget password screen
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ForgetPasswordScreen(),
+                                builder: (context) =>const ForgetPasswordScreen(),
                               ),
                             );
                           },
@@ -135,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(color: Colors.blue.shade300),
                               )),
                         ),
-                        SizedBox(height: 10),
+                       const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -162,19 +160,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               //   }
                               // },
                               child: _loading
-                                  ? CircularProgressIndicator()
-                                  : Text(
+                                  ?const CircularProgressIndicator()
+                                  :const Text(
                                       'Login',
                                       style: TextStyle(color: bg, fontSize: 18),
                                     ),
                             ),
                           ],
                         ),
-                        SizedBox(
+                       const SizedBox(
                           height: 25,
                         ),
 
-                        Row(
+                       const Row(
                           children: [
                             Expanded(
                               child: Divider(
@@ -195,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
 
-                        SizedBox(
+                       const SizedBox(
                           height: 25,
                         ),
 
@@ -216,10 +214,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         //       ],
                         //     )),
 
-                        SizedBox(height: 25),
+                       const SizedBox(height: 25),
                         TextButton(
                           onPressed: () {
-                            // Navigate to signup screen
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -230,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                             const Text(
                                 'New user?',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -260,21 +257,19 @@ class _LoginScreenState extends State<LoginScreen> {
         _loading = true;
       });
 
-      // Replace the following lines with your actual login logic
-      Future.delayed(Duration(seconds: 2), () async {
+      Future.delayed(const Duration(seconds: 2), () async {
         setState(() {
           _loading = false;
         });
 
-        // If login is successful, navigate to home screen
-        // Replace the pushReplacement with your actual navigation logic
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString('email', _emailController.text);
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HomeScreen(),
+              // builder: (context) => HomeScreen(),
+              builder: (context) => const MainScreen(),
             ));
       });
     }

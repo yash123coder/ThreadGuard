@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:myapp/screens/forget_password.dart';
-// import '../../threadguard/home_screen.dart';
-// import 'package:myapp/screens/login_screen.dart';
-// import 'package:myapp/screens/signup_screen.dart';
-import 'package:myapp/screens/login%20sigup%20screen/splash_screen.dart';
+import 'package:myapp/components/theme/heme.dart';
+import 'package:myapp/screens/nav%20screens/mainscreen.dart';
+// import 'package:myapp/screens/nav%20screens/mainscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,17 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Splash Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BackgroundImageDecorator(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Splash Screen',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        // home: SplashScreen(),
+        home:  const MainScreen(),
       ),
-      home: SplashScreen(),
-      // home: BottomNavigationScreen(),
-      // routes: {
-      //   // '/homescreen': (context) => HomeScreen(),
-      // },
     );
   }
 }

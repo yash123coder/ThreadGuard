@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
-// import 'package:myapp/const/color.dart';
-import 'package:myapp/screens/nav%20screens/home_screen.dart';
-// import '../../../threadguard/home_screen.dart';
 import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
+import 'package:myapp/screens/nav%20screens/mainscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     _fadeInAnimation = Tween<double>(
@@ -44,13 +42,13 @@ class _SplashScreenState extends State<SplashScreen>
 
     _animationController.forward();
 
-    // Navigate to the next screen after 5 seconds
     getvalidationData().whenComplete(() async {
-      Future.delayed(Duration(seconds: 5), () {
+      Future.delayed(const Duration(seconds: 5), () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) =>
-                finalEmail == null ? LoginScreen() : HomeScreen(),
+                finalEmail == null ? LoginScreen() : const MainScreen(),
+                // finalEmail == null ? LoginScreen() : HomeScreen(),
           ),
         );
       });
@@ -65,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/bg1.jpg'),
+              image:const AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.fill, // Use BoxFit.fill to cover the full screen
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.5), // Add opacity to the image
@@ -85,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen>
                     SizedBox(
                       height: size.height * 0.05,
                     ),
-                    Row(
+                   const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GlowIcon(Icons.security, color: Colors.white),
@@ -93,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
                           width: 2,
                         ),
                         GlowText(
-                          'ThreadGuard',
+                          'ThreatGuard',
                           style: TextStyle(
                               fontSize: 24.0,
                               // fontWeight: FontWeight.bold,
@@ -104,21 +102,21 @@ class _SplashScreenState extends State<SplashScreen>
                     SizedBox(
                       height: size.height * 0.05,
                     ),
-                    GlowText(
+                   const GlowText(
                       'Protect your',
                       style: TextStyle(
                           fontSize: 34.0,
                           // fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    GlowText(
+                   const GlowText(
                       'personal data',
                       style: TextStyle(
                           fontSize: 28.0,
                           // fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    SizedBox(height: 16.0),
+                   const SizedBox(height: 16.0),
                     // CircularProgressIndicator(),
                     Image.asset(
                       'assets/images/splashbg.png',

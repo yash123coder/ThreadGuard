@@ -5,10 +5,24 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Icon(Icons.settings),
-      ),
+    return const Stack(
+      children:  [
+        //list of object of jokes in javascript
+         Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Icon(
+                Icons.settings,
+                size: 100,
+                color: Colors.white10,
+              )),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
