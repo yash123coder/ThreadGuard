@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "647755150503",
+    "project_id": "threatguard-83118",
+    "storage_bucket": "threatguard-83118.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647755150503:android:1ef695a9929fb154d2d782",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvdD0rGCfwGt2wm5j19YJ_01L0AI-G-no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,5 +8,5 @@ class UserProfile {
       {required this.username,
       required this.email,
       required this.password,
-      required this.profilePhotoUrl});
+      required this.profilePhotoUrl}); 
 }

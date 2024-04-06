@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/components/google_login.dart';
 import 'package:myapp/const/color.dart';
@@ -24,10 +26,10 @@ class _SignupScreenState extends State<SignupScreen> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image:const AssetImage('assets/images/bg1.jpg'),
+              image: const AssetImage('assets/images/bg1.jpg'),
               fit: BoxFit.fill, // Use BoxFit.fill to cover the full screen
               colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.5), // Add opacity to the image
+                Colors.black.withOpacity(0.5), // Add opacity to the image
                 BlendMode.srcOver,
               ),
             ),
@@ -50,10 +52,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         'assets/images/security.png',
                         height: 200,
                       ),
-                     const SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                     const Center(
+                      const Center(
                         child: Text(
                           "CREATE ACCOUNT",
                           style: TextStyle(color: Colors.white, fontSize: 20),
@@ -61,10 +63,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       TextFormField(
                         controller: _nameController,
-                        style:const TextStyle(color: Colors.white),
-                        decoration:const InputDecoration(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           labelText: 'Name',
-                          labelStyle:const TextStyle(color: Colors.white70),
+                          labelStyle: const TextStyle(color: Colors.white70),
                           prefixIcon: Icon(Icons.person, color: Colors.white70),
                         ),
                         validator: (value) {
@@ -74,11 +76,11 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                     const SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       TextFormField(
                         controller: _emailController,
-                        style:const TextStyle(color: Colors.white),
-                        decoration:const InputDecoration(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.white70),
                           prefixIcon: Icon(Icons.email, color: Colors.white70),
@@ -94,17 +96,18 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                     const SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle:const TextStyle(color: Colors.white70),
-                          prefixIcon:const Icon(Icons.key, color: Colors.white70),
+                          labelStyle: const TextStyle(color: Colors.white70),
+                          prefixIcon:
+                              const Icon(Icons.key, color: Colors.white70),
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -129,7 +132,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                     const SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       // TextFormField(
                       //   controller: _confirmPasswordController,
                       //   obscureText: true,
@@ -147,13 +150,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isPasswordVisible,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle:const TextStyle(color: Colors.white70),
-                          prefixIcon:const Icon(Icons.key, color: Colors.white70),
+                          labelStyle: const TextStyle(color: Colors.white70),
+                          prefixIcon:
+                              const Icon(Icons.key, color: Colors.white70),
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
@@ -181,17 +185,31 @@ class _SignupScreenState extends State<SignupScreen> {
                           return null;
                         },
                       ),
-                     const SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       ElevatedButton(
-                        onPressed: _submit,
-                        child:const Text(
+                        onPressed: () => {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text)
+                              .then((value) => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          // builder: (context) => HomeScreen(),
+                                          builder: (context) =>
+                                              const MainScreen(),
+                                        ))
+                                  })
+                        },
+                        child: const Text(
                           'Sign Up',
                           style: TextStyle(color: bg, fontSize: 18),
                         ),
                       ),
-                     const SizedBox(height: 12),
+                      const SizedBox(height: 12),
 
-                    const  Row(
+                      const Row(
                         children: [
                           Expanded(
                             child: Divider(
@@ -212,10 +230,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
 
-                     const SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
-                      
+
                       GoogleSignInButton(onPressed: () {}),
                       // ElevatedButton(
                       //     onPressed: () {},
@@ -233,7 +251,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       //       ],
                       //     )),
 
-                     const SizedBox(height: 12),
+                      const SizedBox(height: 12),
 
                       TextButton(
                         onPressed: () {
@@ -248,7 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           const Text(
+                            const Text(
                               'Already have an account?',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -271,20 +289,21 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Future<void> _submit() async {
-    if (_formKey.currentState!.validate()) {
-      final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString('name', _nameController.text);
-        sharedPreferences.setString('email', _emailController.text);
-        sharedPreferences.setString('password', _passwordController.text);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              // builder: (context) => HomeScreen(),
-              builder: (context) => const MainScreen(),
-            )
-            );
-    }
-  }
+  // Future<void> _submit() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     final SharedPreferences sharedPreferences =
+  //           await SharedPreferences.getInstance();
+  //       sharedPreferences.setString('name', _nameController.text);
+  //       sharedPreferences.setString('email', _emailController.text);
+  //       sharedPreferences.setString('password', _passwordController.text);
+  //       Navigator.pushReplacement(
+  //           context,
+
+  //         MaterialPageRoute(
+  //             // builder: (context) => HomeScreen(),
+  //             builder: (context) => const MainScreen(),
+  //           )
+  //           );
+  //   }
+  // }
 }

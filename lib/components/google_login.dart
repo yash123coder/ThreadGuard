@@ -11,8 +11,7 @@ class GoogleSignInButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: Colors.white, // Change the background color as needed
-        onPrimary: Colors.black, // Change the text color as needed
+        foregroundColor: Colors.black, backgroundColor: Colors.white, // Change the text color as needed
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

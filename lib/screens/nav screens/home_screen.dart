@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:myapp/const/color.dart';
 import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
           //     ),
           //   ),
           // ),
-          child: SafeArea(
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Center(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+              child: SingleChildScrollView(
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -93,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 40,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -291,18 +293,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    MaterialButton(
+                    SizedBox(height: 20),
+                    ElevatedButton(
                         onPressed: () async {
-                          final SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          sharedPreferences.remove('email');
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ));
+                          // final SharedPreferences sharedPreferences =
+                          //     await SharedPreferences.getInstance();
+                          // sharedPreferences.remove('email');
+                          FirebaseAuth.instance.signOut().then((value) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginScreen(),
+                                ));
+                          });
                         },
-                        child: const Text('logout')),
+                        child: const Text(
+                          'logout',
+                          style: TextStyle(color: bg, fontSize: 18),
+                        )),
                   ],
                 ),
               ),

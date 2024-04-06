@@ -4,7 +4,6 @@ import 'package:myapp/components/theme/heme.dart';
 import 'package:myapp/screens/nav%20screens/history_screen.dart';
 import 'package:myapp/screens/nav%20screens/home_screen.dart';
 import 'package:myapp/screens/nav%20screens/profile/profile_screen.dart';
-import 'package:myapp/screens/nav%20screens/setting_screen.dart';
 import 'package:myapp/screens/nav%20screens/profile/user_profile.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   List pages =  [
     const HomeScreen(),
     MyHistoryScreen(),
-    const SettingsScreen(),
     MyProfileScreen(userProfile: UserProfile(
     username: 'Pratik Jalodkar',
     email: 'pjalo@gmail.com',
@@ -60,7 +58,6 @@ class _MainScreenState extends State<MainScreen> {
                   items: const [
                     Icon(Icons.home),
                     Icon(Icons.history),
-                    Icon(Icons.settings),
                     Icon(Icons.person),
                   ])),
         ),

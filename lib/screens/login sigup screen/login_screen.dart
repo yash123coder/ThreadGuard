@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/components/google_login.dart';
 import 'package:myapp/const/color.dart';
+import 'package:myapp/screens/login%20sigup%20screen/forget_password.dart';
 import 'package:myapp/screens/login%20sigup%20screen/signup_screen.dart';
 import 'package:myapp/screens/nav%20screens/mainscreen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'forget_password.dart';
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -17,6 +16,21 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _loading = false;
   bool _isPasswordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if the user is already signed in
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        // If user is already signed in, navigate to the main screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +61,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('assets/images/security.png'),
-
                         SizedBox(
                           height: size.height * 0.01,
                         ),
-
-                       const Text(
+                        const Text(
                           "Welcome Back!",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                       const SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
@@ -116,63 +128,43 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        // SizedBox(height: 7),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>const ForgetPasswordScreen(),
+                                builder: (context) =>
+                                    const ForgetPasswordScreen(),
                               ),
                             );
                           },
                           child: Container(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'Forgot Password?',
-                                style: TextStyle(color: Colors.blue.shade300),
-                              )),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(color: Colors.blue.shade300),
+                            ),
+                          ),
                         ),
-                       const SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             ElevatedButton(
                               onPressed: _loading ? null : _submit,
-                              // onPressed: () async {
-                              //   if (_emailController.text.isEmpty ||
-                              //       _passwordController.text.isEmpty) {
-                              //     // Display an error message or show a Snackbar indicating empty fields
-                              //     // You can replace this with your own error handling logic
-                              //     print(
-                              //         "Please fill in both email and password");
-                              //   } else {
-                              //     // final SharedPreferences sharedPreferences =
-                              //     //     await SharedPreferences.getInstance();
-                              //     // sharedPreferences.setString(
-                              //     //     'email', _emailController.text);
-                              //     // Navigator.pushReplacement(
-                              //     //     context,
-                              //     //     MaterialPageRoute(
-                              //     //       builder: (context) => HomeScreen(),
-                              //     //     )
-                              //     //     );
-                              //   }
-                              // },
                               child: _loading
-                                  ?const CircularProgressIndicator()
-                                  :const Text(
+                                  ? const CircularProgressIndicator()
+                                  : const Text(
                                       'Login',
                                       style: TextStyle(color: bg, fontSize: 18),
                                     ),
                             ),
                           ],
                         ),
-                       const SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-
-                       const Row(
+                        const Row(
                           children: [
                             Expanded(
                               child: Divider(
@@ -192,29 +184,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-
-                       const SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-
                         GoogleSignInButton(onPressed: () {}),
-                        // ElevatedButton(
-                        //     onPressed: () {},
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         Image.asset(
-                        //           'assets/images/google.png',
-                        //           height: 30,
-                        //         ),
-                        //         Text(
-                        //           'Log in with Google',
-                        //           style: TextStyle(color: bg, fontSize: 18),
-                        //         ),
-                        //       ],
-                        //     )),
-
-                       const SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -227,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                             const Text(
+                              const Text(
                                 'New user?',
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -250,28 +224,28 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
-      // Simulate login process
       setState(() {
         _loading = true;
       });
 
-      Future.delayed(const Duration(seconds: 2), () async {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+      } catch (e) {
+        print('Error signing in: $e');
+        // Show error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to sign in. Please try again.')),
+        );
+      } finally {
         setState(() {
           _loading = false;
         });
-
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString('email', _emailController.text);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              // builder: (context) => HomeScreen(),
-              builder: (context) => const MainScreen(),
-            ));
-      });
+      }
     }
   }
 }
