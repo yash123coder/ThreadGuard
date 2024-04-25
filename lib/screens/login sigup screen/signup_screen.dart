@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/const/color.dart';
 import 'package:myapp/screens/login%20sigup%20screen/login_screen.dart';
 import 'package:myapp/screens/nav%20screens/mainscreen.dart';
-import 'package:myapp/screens/verifyemail_screen.dart';
+//import 'package:myapp/screens/verifyemail_screen.dart';
+
+import 'verifyemail_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -230,7 +232,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const verifyemailscreen(),
+                                    const EmailVerificationPage(),
                               ),
                             );
                           },
