@@ -293,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                         onPressed: () async {
                           // final SharedPreferences sharedPreferences =
@@ -303,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
+                                  builder: (context) => const LoginScreen(),
                                 ));
                           });
                         },

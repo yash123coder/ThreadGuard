@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MyProfileScreen extends StatelessWidget {
   final UserProfile userProfile;
 
-  MyProfileScreen({required this.userProfile});
+  const MyProfileScreen({super.key, required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MyProfileScreen extends StatelessWidget {
             future: SharedPreferences.getInstance(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               String email = snapshot.data?.getString('email') ?? '';
               String username = snapshot.data?.getString('name') ?? '';
@@ -48,12 +48,12 @@ class MyProfileScreen extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             username,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                           const SizedBox(height: 5),
                           Text(
                             email,
-                            style: TextStyle(fontSize: 18, color: Colors.white),
+                            style: const TextStyle(fontSize: 18, color: Colors.white),
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class GoogleSignInButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const GoogleSignInButton({Key? key, required this.onPressed})
-      : super(key: key);
+  const GoogleSignInButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +19,8 @@ class GoogleSignInButton extends StatelessWidget {
             'assets/images/google.png',
             height: 30,
           ),
-          SizedBox(width: 8),
-          Text(
+          const SizedBox(width: 8),
+          const Text(
             'Log in with Google',
             style: TextStyle(fontSize: 18),
           ),

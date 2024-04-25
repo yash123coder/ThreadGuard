@@ -22,6 +22,8 @@ Future<List<VirusDetection>> fetchVirusDetectionHistory() async {
 }
 
 class MyHistoryScreen extends StatefulWidget {
+  const MyHistoryScreen({super.key});
+
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }

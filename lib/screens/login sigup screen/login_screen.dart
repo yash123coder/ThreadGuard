@@ -5,7 +5,10 @@ import 'package:myapp/const/color.dart';
 import 'package:myapp/screens/login%20sigup%20screen/forget_password.dart';
 import 'package:myapp/screens/login%20sigup%20screen/signup_screen.dart';
 import 'package:myapp/screens/nav%20screens/mainscreen.dart';
+
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -26,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // If user is already signed in, navigate to the main screen
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainScreen()),
+          MaterialPageRoute(builder: (context) => const MainScreen()),
         );
       }
     });
@@ -194,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignupScreen(),
+                                builder: (context) => const SignupScreen(),
                               ),
                             );
                           },
@@ -231,15 +234,24 @@ class _LoginScreenState extends State<LoginScreen> {
       });
 
       try {
+        // Sign in the user using FirebaseAuth
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
-      } catch (e) {
+      } on FirebaseAuthException catch (e) {
         print('Error signing in: $e');
         // Show error message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to sign in. Please try again.')),
+          const SnackBar(content: Text('Account does not exist')),
+        );
+      } catch (e) {
+        print('Unexpected error: $e');
+        // Show error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content:
+                  Text('Unexpected error occurred. Please try again later.')),
         );
       } finally {
         setState(() {

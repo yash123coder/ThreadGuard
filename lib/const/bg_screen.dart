@@ -8,7 +8,7 @@ class bgScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/bg1.jpg'),
+          image: const AssetImage('assets/images/bg1.jpg'),
           fit: BoxFit.fill, // Use BoxFit.fill to cover the full screen
           colorFilter: ColorFilter.mode(
             Colors.black.withOpacity(0.5), // Add opacity to the image

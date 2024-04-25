@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List pages =  [
     const HomeScreen(),
-    MyHistoryScreen(),
+    const MyHistoryScreen(),
     MyProfileScreen(userProfile: UserProfile(
     username: 'Pratik Jalodkar',
     email: 'pjalo@gmail.com',

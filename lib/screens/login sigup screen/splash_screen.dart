@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = 'SplashScreen';
+
+  const SplashScreen({super.key});
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -47,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) =>
-                finalEmail == null ? LoginScreen() : const MainScreen(),
+                finalEmail == null ? const LoginScreen() : const MainScreen(),
                 // finalEmail == null ? LoginScreen() : HomeScreen(),
           ),
         );
