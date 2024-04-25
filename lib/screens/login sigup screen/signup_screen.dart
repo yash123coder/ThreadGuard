@@ -230,7 +230,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const EmailVerificationPage(),
+                                    const verifyemailscreen(),
                               ),
                             );
                           },
